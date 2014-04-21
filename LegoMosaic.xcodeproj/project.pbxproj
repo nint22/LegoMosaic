@@ -1,0 +1,277 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		067468591905AE27006705BB /* Input.bmp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 067468581905ADDD006705BB /* Input.bmp */; };
+		0674685A1905AE29006705BB /* BrickDefinitions.txt in CopyFiles */ = {isa = PBXBuildFile; fileRef = 06D8798E1905AB7B00E3E1B3 /* BrickDefinitions.txt */; };
+		0674685C1905AE32006705BB /* MosaicResult.bmp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 06D8799A1905AB7B00E3E1B3 /* MosaicResult.bmp */; };
+		06D8799C1905AB7B00E3E1B3 /* EasyBMP.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 06D879921905AB7B00E3E1B3 /* EasyBMP.cpp */; };
+		06D8799D1905AB7B00E3E1B3 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 06D879991905AB7B00E3E1B3 /* main.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		06D8796C1905AB0900E3E1B3 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 12;
+			dstPath = "";
+			dstSubfolderSpec = 6;
+			files = (
+				0674685C1905AE32006705BB /* MosaicResult.bmp in CopyFiles */,
+				067468591905AE27006705BB /* Input.bmp in CopyFiles */,
+				0674685A1905AE29006705BB /* BrickDefinitions.txt in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		067468581905ADDD006705BB /* Input.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; name = Input.bmp; path = LegoMosaic/Input.bmp; sourceTree = "<group>"; };
+		06D8796E1905AB0900E3E1B3 /* LegoMosaic */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = LegoMosaic; sourceTree = BUILT_PRODUCTS_DIR; };
+		06D8798E1905AB7B00E3E1B3 /* BrickDefinitions.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = BrickDefinitions.txt; path = LegoMosaic/BrickDefinitions.txt; sourceTree = "<group>"; };
+		06D8798F1905AB7B00E3E1B3 /* EasyBMP_BMP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EasyBMP_BMP.h; path = LegoMosaic/EasyBMP_BMP.h; sourceTree = "<group>"; };
+		06D879901905AB7B00E3E1B3 /* EasyBMP_DataStructures.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EasyBMP_DataStructures.h; path = LegoMosaic/EasyBMP_DataStructures.h; sourceTree = "<group>"; };
+		06D879911905AB7B00E3E1B3 /* EasyBMP_VariousBMPutilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EasyBMP_VariousBMPutilities.h; path = LegoMosaic/EasyBMP_VariousBMPutilities.h; sourceTree = "<group>"; };
+		06D879921905AB7B00E3E1B3 /* EasyBMP.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = EasyBMP.cpp; path = LegoMosaic/EasyBMP.cpp; sourceTree = "<group>"; };
+		06D879931905AB7B00E3E1B3 /* EasyBMP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EasyBMP.h; path = LegoMosaic/EasyBMP.h; sourceTree = "<group>"; };
+		06D879961905AB7B00E3E1B3 /* LegoBitmap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LegoBitmap.h; sourceTree = "<group>"; };
+		06D879971905AB7B00E3E1B3 /* LegoSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LegoSet.h; sourceTree = "<group>"; };
+		06D879991905AB7B00E3E1B3 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		06D8799A1905AB7B00E3E1B3 /* MosaicResult.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; name = MosaicResult.bmp; path = LegoMosaic/MosaicResult.bmp; sourceTree = "<group>"; };
+		06D8799B1905AB7B00E3E1B3 /* Vec2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vec2.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		06D8796B1905AB0900E3E1B3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		06D879651905AB0800E3E1B3 = {
+			isa = PBXGroup;
+			children = (
+				06D8799F1905AB8F00E3E1B3 /* Input */,
+				06D8799E1905AB8000E3E1B3 /* EasyBMP */,
+				06D879701905AB0900E3E1B3 /* LegoMosaic */,
+				06D8796F1905AB0900E3E1B3 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		06D8796F1905AB0900E3E1B3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				06D8796E1905AB0900E3E1B3 /* LegoMosaic */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		06D879701905AB0900E3E1B3 /* LegoMosaic */ = {
+			isa = PBXGroup;
+			children = (
+				06D879961905AB7B00E3E1B3 /* LegoBitmap.h */,
+				06D879971905AB7B00E3E1B3 /* LegoSet.h */,
+				06D879991905AB7B00E3E1B3 /* main.cpp */,
+				06D8799B1905AB7B00E3E1B3 /* Vec2.h */,
+			);
+			path = LegoMosaic;
+			sourceTree = "<group>";
+		};
+		06D8799E1905AB8000E3E1B3 /* EasyBMP */ = {
+			isa = PBXGroup;
+			children = (
+				06D8798F1905AB7B00E3E1B3 /* EasyBMP_BMP.h */,
+				06D879901905AB7B00E3E1B3 /* EasyBMP_DataStructures.h */,
+				06D879911905AB7B00E3E1B3 /* EasyBMP_VariousBMPutilities.h */,
+				06D879921905AB7B00E3E1B3 /* EasyBMP.cpp */,
+				06D879931905AB7B00E3E1B3 /* EasyBMP.h */,
+			);
+			name = EasyBMP;
+			sourceTree = "<group>";
+		};
+		06D8799F1905AB8F00E3E1B3 /* Input */ = {
+			isa = PBXGroup;
+			children = (
+				067468581905ADDD006705BB /* Input.bmp */,
+				06D8798E1905AB7B00E3E1B3 /* BrickDefinitions.txt */,
+				06D8799A1905AB7B00E3E1B3 /* MosaicResult.bmp */,
+			);
+			name = Input;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		06D8796D1905AB0900E3E1B3 /* LegoMosaic */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 06D879771905AB0900E3E1B3 /* Build configuration list for PBXNativeTarget "LegoMosaic" */;
+			buildPhases = (
+				06D8796A1905AB0900E3E1B3 /* Sources */,
+				06D8796B1905AB0900E3E1B3 /* Frameworks */,
+				06D8796C1905AB0900E3E1B3 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LegoMosaic;
+			productName = LegoMosaic;
+			productReference = 06D8796E1905AB0900E3E1B3 /* LegoMosaic */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		06D879661905AB0800E3E1B3 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = CoreS2;
+			};
+			buildConfigurationList = 06D879691905AB0800E3E1B3 /* Build configuration list for PBXProject "LegoMosaic" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 06D879651905AB0800E3E1B3;
+			productRefGroup = 06D8796F1905AB0900E3E1B3 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				06D8796D1905AB0900E3E1B3 /* LegoMosaic */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		06D8796A1905AB0900E3E1B3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				06D8799D1905AB7B00E3E1B3 /* main.cpp in Sources */,
+				06D8799C1905AB7B00E3E1B3 /* EasyBMP.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		06D879751905AB0900E3E1B3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		06D879761905AB0900E3E1B3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		06D879781905AB0900E3E1B3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		06D879791905AB0900E3E1B3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		06D879691905AB0800E3E1B3 /* Build configuration list for PBXProject "LegoMosaic" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				06D879751905AB0900E3E1B3 /* Debug */,
+				06D879761905AB0900E3E1B3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		06D879771905AB0900E3E1B3 /* Build configuration list for PBXNativeTarget "LegoMosaic" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				06D879781905AB0900E3E1B3 /* Debug */,
+				06D879791905AB0900E3E1B3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 06D879661905AB0800E3E1B3 /* Project object */;
+}
