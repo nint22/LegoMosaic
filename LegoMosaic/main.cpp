@@ -49,7 +49,7 @@ int main( int argc, const char * argv[] )
     {
         int r = 0, g = 0, b = 0;
         fscanf( file, "%d %d %d", &r, &g, &b );
-        brickColors.push_back( BrickColor() );
+        brickColors.push_back( RGB8ToUint32( r, g, b ) );
     }
     
     // Read number of bricks

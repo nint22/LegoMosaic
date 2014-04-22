@@ -6,6 +6,9 @@ to a set of close-color matching bricks (based off of the brick definition file)
 prints out the number and type of bricks, as well as cost, to form the real-world Lego
 set.
 
+This problem is solved using A* heuristic searching, where the goal is to minimize cost
+and brick count.
+
 The input image must have black as a default no-fill color, and be small, since 1 pixel is
 equal to 1 peg in Lego units. The brick definition list is just a text file with integers:
 the first integer represents the number of colors, which is then followed by three integers
@@ -16,6 +19,7 @@ of brick definitions, which is space-delimited integers for width, height, and c
 Todo
 ====
 
++ Add support back for Visual Studio C++ Express for Windows
 + Start on edges that are black-non-black, rather than doing a scan-line fill
 
 Lego Fair-Play Usage

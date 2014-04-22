@@ -105,7 +105,7 @@ public:
 
 	// Cost of the brick list
 	int Cost() { return m_cost; }
-	int Score() { return 100000 - m_brickList.size() + m_pegCount * 10; } // Higher is better; 
+	int Score() { return 100000 - (int)m_brickList.size() + m_pegCount * 10; } // Higher is better;
 
 	// Return true if there is already a piece here
 	// No bounds-checking!
@@ -141,7 +141,7 @@ LegoSet::LegoSet( const Vec2& boardSize, const BrickDefinitionList& brickDefinit
 	m_boardOccupancy.resize( m_boardSize.x * m_boardSize.y, false );
 
 	// Add given bricks, don't do a deep copy since we need to setup the board
-	const int brickCount = bricks.size();
+	const int brickCount = (int)bricks.size();
 	for( int i = 0; i < brickCount; i++ )
 	{
 		AddBrick( bricks.at( i ) );
@@ -158,7 +158,7 @@ LegoSet::LegoSet( const LegoSet& legoSet )
 	m_cost = 0;
 	m_pegCount = 0;
 	
-	const int brickCount = m_brickList.size();
+	const int brickCount = (int)m_brickList.size();
 	for( int i = 0; i < brickCount; i++ )
 	{
 		BrickDefinition& brickDef = m_brickDefinitions.at( m_brickList.at( i ).m_definitionId );
@@ -186,7 +186,6 @@ bool LegoSet::AddBrick( const Brick& brick )
 	}
 
 	// Collision and bounds checking
-	bool sameColor = true;
 	bool fail = false;
 	IterateBrick( brick, [&](Vec2 pos)
 	{

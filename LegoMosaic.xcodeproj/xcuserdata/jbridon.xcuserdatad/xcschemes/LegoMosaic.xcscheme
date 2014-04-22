@@ -59,7 +59,7 @@
       </BuildableProductRunnable>
       <CommandLineArguments>
          <CommandLineArgument
-            argument = "BrickDefinitions.txt Input.bmp"
+            argument = "BrickDefinitions.txt InputLowRes_2.bmp"
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>

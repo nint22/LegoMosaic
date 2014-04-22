@@ -167,7 +167,7 @@ void LegoBitmap::Solve( const char* sourceImageFileName )
 	for( int depth = 0; depth < INT_MAX; depth++ )
 	{
 		// Active working set
-		printf( "Searching at depth #%d, %d bricks used\n", depth, searchHead.GetBrickList().size() );
+		printf( "Searching at depth #%d, %d bricks used\n", depth, (int)searchHead.GetBrickList().size() );
 
 		// Note that we start at the top-left most colored pixel if first iteration
 		std::vector< Vec2 > nextPositions;
@@ -180,7 +180,7 @@ void LegoBitmap::Solve( const char* sourceImageFileName )
 			nextPositions = searchHead.GetNextPositions();
 		}
 
-		int nextPositionCount = nextPositions.size();
+		int nextPositionCount = (int)nextPositions.size();
 		nextPositionCount = nextPositionCount > 5 ? 5 : nextPositionCount;
 
 		// Our best local set
@@ -188,7 +188,7 @@ void LegoBitmap::Solve( const char* sourceImageFileName )
 
 		// For each brick type
 		bool isValid = false; // Has a valid local solution
-		const int brickDefCount = m_brickDefinitions.size();
+		const int brickDefCount = (int)m_brickDefinitions.size();
 		for( int i = 0; i < brickDefCount; i++ )
 		{
 			// For each position
@@ -226,7 +226,7 @@ void LegoBitmap::Solve( const char* sourceImageFileName )
 		if( searchHead.IsSolved() )
 		{
 			int cost = searchHead.Cost();
-			printf( "Found solution! Piece count %d, cost $%d.%02d\n", searchHead.GetBrickList().size(), cost / 100, cost % 100 );
+			printf( "Found solution! Piece count %d, cost $%d.%02d\n", (int)searchHead.GetBrickList().size(), cost / 100, cost % 100 );
 			return;
 		}
 	}
@@ -266,7 +266,7 @@ void LegoBitmap::SaveBitmap( const char* fileName, const LegoSet& legoSet, int t
 	} );
 
 	// For each brick
-	const int brickCount = legoSet.GetBrickList().size();
+	const int brickCount = (int)legoSet.GetBrickList().size();
 	for( int i = 0; i < brickCount; i++ )
 	{
 		Brick brick = legoSet.GetBrickList().at( i );
@@ -364,18 +364,16 @@ int LegoBitmap::MatchBitmapColorToBrickColor( BrickColor givenColor )
     int bestMatch = 255 * 3; // Start worst-case
     int bestMatchIndex = -1;
 
-	const int cBrickColorCount = m_brickColors.size();
+	const int cBrickColorCount = (int)m_brickColors.size();
     for( int i = 0; i < cBrickColorCount; i++ )
     {
         BrickColor testColor = m_brickColors.at( i );
         int rank = 0;
-        for( int j = 0; j < 3; j++ )
-        {
-			// Rank is difference *per channel*
-            rank += Abs( ( ( testColor >> 16 ) & 0xFF ) - ( ( givenColor >> 16 ) & 0xFF ) );
-            rank += Abs( ( ( testColor >> 8  ) & 0xFF ) - ( ( givenColor >> 8  ) & 0xFF ) );
-            rank += Abs( ( ( testColor >> 0  ) & 0xFF ) - ( ( givenColor >> 0  ) & 0xFF ) );
-        }
+        
+        // Rank is difference *per channel*
+        rank += Abs( ( ( testColor >> 16 ) & 0xFF ) - ( ( givenColor >> 16 ) & 0xFF ) );
+        rank += Abs( ( ( testColor >> 8  ) & 0xFF ) - ( ( givenColor >> 8  ) & 0xFF ) );
+        rank += Abs( ( ( testColor >> 0  ) & 0xFF ) - ( ( givenColor >> 0  ) & 0xFF ) );
 
         if( rank < bestMatch )
         {

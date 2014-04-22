@@ -9,7 +9,8 @@
 /* Begin PBXBuildFile section */
 		067468591905AE27006705BB /* Input.bmp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 067468581905ADDD006705BB /* Input.bmp */; };
 		0674685A1905AE29006705BB /* BrickDefinitions.txt in CopyFiles */ = {isa = PBXBuildFile; fileRef = 06D8798E1905AB7B00E3E1B3 /* BrickDefinitions.txt */; };
-		0674685C1905AE32006705BB /* MosaicResult.bmp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 06D8799A1905AB7B00E3E1B3 /* MosaicResult.bmp */; };
+		0674685E19061DD3006705BB /* InputLowRes.bmp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0674685D19061DC4006705BB /* InputLowRes.bmp */; };
+		0674686119061F7F006705BB /* InputLowRes_2.bmp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0674686019061F64006705BB /* InputLowRes_2.bmp */; };
 		06D8799C1905AB7B00E3E1B3 /* EasyBMP.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 06D879921905AB7B00E3E1B3 /* EasyBMP.cpp */; };
 		06D8799D1905AB7B00E3E1B3 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 06D879991905AB7B00E3E1B3 /* main.cpp */; };
 /* End PBXBuildFile section */
@@ -21,9 +22,10 @@
 			dstPath = "";
 			dstSubfolderSpec = 6;
 			files = (
-				0674685C1905AE32006705BB /* MosaicResult.bmp in CopyFiles */,
+				0674686119061F7F006705BB /* InputLowRes_2.bmp in CopyFiles */,
 				067468591905AE27006705BB /* Input.bmp in CopyFiles */,
 				0674685A1905AE29006705BB /* BrickDefinitions.txt in CopyFiles */,
+				0674685E19061DD3006705BB /* InputLowRes.bmp in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -31,6 +33,9 @@
 
 /* Begin PBXFileReference section */
 		067468581905ADDD006705BB /* Input.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; name = Input.bmp; path = LegoMosaic/Input.bmp; sourceTree = "<group>"; };
+		0674685D19061DC4006705BB /* InputLowRes.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; name = InputLowRes.bmp; path = LegoMosaic/InputLowRes.bmp; sourceTree = "<group>"; };
+		0674685F19061E16006705BB /* MosaicResult.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; name = MosaicResult.bmp; path = LegoMosaic/MosaicResult.bmp; sourceTree = "<group>"; };
+		0674686019061F64006705BB /* InputLowRes_2.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; name = InputLowRes_2.bmp; path = LegoMosaic/InputLowRes_2.bmp; sourceTree = "<group>"; };
 		06D8796E1905AB0900E3E1B3 /* LegoMosaic */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = LegoMosaic; sourceTree = BUILT_PRODUCTS_DIR; };
 		06D8798E1905AB7B00E3E1B3 /* BrickDefinitions.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = BrickDefinitions.txt; path = LegoMosaic/BrickDefinitions.txt; sourceTree = "<group>"; };
 		06D8798F1905AB7B00E3E1B3 /* EasyBMP_BMP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EasyBMP_BMP.h; path = LegoMosaic/EasyBMP_BMP.h; sourceTree = "<group>"; };
@@ -41,7 +46,6 @@
 		06D879961905AB7B00E3E1B3 /* LegoBitmap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LegoBitmap.h; sourceTree = "<group>"; };
 		06D879971905AB7B00E3E1B3 /* LegoSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LegoSet.h; sourceTree = "<group>"; };
 		06D879991905AB7B00E3E1B3 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
-		06D8799A1905AB7B00E3E1B3 /* MosaicResult.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; name = MosaicResult.bmp; path = LegoMosaic/MosaicResult.bmp; sourceTree = "<group>"; };
 		06D8799B1905AB7B00E3E1B3 /* Vec2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vec2.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -100,9 +104,11 @@
 		06D8799F1905AB8F00E3E1B3 /* Input */ = {
 			isa = PBXGroup;
 			children = (
+				0674686019061F64006705BB /* InputLowRes_2.bmp */,
+				0674685F19061E16006705BB /* MosaicResult.bmp */,
+				0674685D19061DC4006705BB /* InputLowRes.bmp */,
 				067468581905ADDD006705BB /* Input.bmp */,
 				06D8798E1905AB7B00E3E1B3 /* BrickDefinitions.txt */,
-				06D8799A1905AB7B00E3E1B3 /* MosaicResult.bmp */,
 			);
 			name = Input;
 			sourceTree = "<group>";
