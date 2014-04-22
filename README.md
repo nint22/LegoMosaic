@@ -16,6 +16,9 @@ the first integer represents the number of colors, which is then followed by thr
 shape and cost list, which starts with the number of bricks. This is then followed by rows
 of brick definitions, which is space-delimited integers for width, height, and cost (in cents).
 
+![ScreenShot](https://raw.github.com/nint22/LegoMosaic/master/LegoMosaic/InputLowRes_2.bmp)
+![ScreenShot](https://raw.github.com/nint22/LegoMosaic/master/ExampleOutput_2.bmp)
+
 Todo
 ====
 
