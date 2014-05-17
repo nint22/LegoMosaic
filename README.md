@@ -28,7 +28,7 @@ The following images represent given input, Mosaic conversion, and the result of
 ![Mosaic Conversion; Colors now match Lego colors](https://raw.githubusercontent.com/nint22/LegoMosaic/master/LegoMosaicProgress_Output.png)
 ![Lego Conversion; Samus now built out of Lego plates / bricks](https://raw.githubusercontent.com/nint22/LegoMosaic/master/LegoMosaicProgress_00361.png)
 
-Video link of converting a Mario / Bowser image: [YouTube Link](https://www.youtube.com/watch?v=ECu_di70cPY).
+Video link of converting a Mario / Bowser image: [YouTube Link](https://www.youtube.com/watch?v=ECu_di70cPY). Video for Samus: [YouTube Link](https://www.youtube.com/watch?v=dZAf6Xowgn8).
 
 Here's a great example of sample output; this comes from converting the SNES front-facing Samus sprint from Super Metroid:
 
