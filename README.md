@@ -24,9 +24,9 @@ In comparison, the "LEGO Star Wars Ultimate Collector's Millennium Falcon" has 5
 
 *The following images represent given input, Mosaic conversion, and the result of the A\* Lego fill algorithm:*
 
-![Input; Samus from Super Metroid](https://raw.github.com/nint22/LegoMosaic/master/LegoMosaic/Samus.png)
-![Mosaic Conversion; Colors now match Lego colors](https://raw.github.com/nint22/LegoMosaic/master/LegoMosaicProgress_Output.png)
-![Lego Conversion; Samus now built out of Lego plates / bricks](https://raw.github.com/nint22/LegoMosaic/master/LegoMosaicProgress_00361.png)
+![Input; Samus from Super Metroid](https://raw.githubusercontent.com/nint22/LegoMosaic/master/Samus.png)
+![Mosaic Conversion; Colors now match Lego colors](https://raw.githubusercontent.com/nint22/LegoMosaic/master/LegoMosaicProgress_Output.png)
+![Lego Conversion; Samus now built out of Lego plates / bricks](https://raw.githubusercontent.com/nint22/LegoMosaic/master/LegoMosaicProgress_00361.png)
 
 Video link of converting a Mario / Bowser image: [YouTube Link](https://www.youtube.com/watch?v=ECu_di70cPY).
 
