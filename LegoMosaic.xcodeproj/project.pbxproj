@@ -7,11 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		067468591905AE27006705BB /* Input.bmp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 067468581905ADDD006705BB /* Input.bmp */; };
+		0612C068190DB72D00C74FFA /* LegoSet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0612C067190DB72D00C74FFA /* LegoSet.cpp */; };
+		0612C06A190DB73500C74FFA /* LegoBitmap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0612C069190DB73500C74FFA /* LegoBitmap.cpp */; };
+		063B12DC1926832D0076798B /* LegoMosaic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 063B12DB1926832D0076798B /* LegoMosaic.cpp */; };
+		063B12E21926EB1A0076798B /* CoreS2Logo.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 063B12DF1926EB110076798B /* CoreS2Logo.png */; };
+		063B12E31926EB1C0076798B /* HelloMac.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 063B12E01926EB110076798B /* HelloMac.png */; };
+		063B12E61926ED760076798B /* lodepng.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 063B12E41926ED760076798B /* lodepng.cpp */; };
+		063B12EE1927E9070076798B /* MarioBowser.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 063B12EC1927E9030076798B /* MarioBowser.png */; };
+		063B12EF1927E9080076798B /* Samus.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 063B12ED1927E9030076798B /* Samus.png */; };
 		0674685A1905AE29006705BB /* BrickDefinitions.txt in CopyFiles */ = {isa = PBXBuildFile; fileRef = 06D8798E1905AB7B00E3E1B3 /* BrickDefinitions.txt */; };
-		0674685E19061DD3006705BB /* InputLowRes.bmp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0674685D19061DC4006705BB /* InputLowRes.bmp */; };
-		0674686119061F7F006705BB /* InputLowRes_2.bmp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0674686019061F64006705BB /* InputLowRes_2.bmp */; };
-		06D8799C1905AB7B00E3E1B3 /* EasyBMP.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 06D879921905AB7B00E3E1B3 /* EasyBMP.cpp */; };
 		06D8799D1905AB7B00E3E1B3 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 06D879991905AB7B00E3E1B3 /* main.cpp */; };
 /* End PBXBuildFile section */
 
@@ -22,27 +26,29 @@
 			dstPath = "";
 			dstSubfolderSpec = 6;
 			files = (
-				0674686119061F7F006705BB /* InputLowRes_2.bmp in CopyFiles */,
-				067468591905AE27006705BB /* Input.bmp in CopyFiles */,
+				063B12EE1927E9070076798B /* MarioBowser.png in CopyFiles */,
+				063B12EF1927E9080076798B /* Samus.png in CopyFiles */,
 				0674685A1905AE29006705BB /* BrickDefinitions.txt in CopyFiles */,
-				0674685E19061DD3006705BB /* InputLowRes.bmp in CopyFiles */,
+				063B12E31926EB1C0076798B /* HelloMac.png in CopyFiles */,
+				063B12E21926EB1A0076798B /* CoreS2Logo.png in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		067468581905ADDD006705BB /* Input.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; name = Input.bmp; path = LegoMosaic/Input.bmp; sourceTree = "<group>"; };
-		0674685D19061DC4006705BB /* InputLowRes.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; name = InputLowRes.bmp; path = LegoMosaic/InputLowRes.bmp; sourceTree = "<group>"; };
-		0674685F19061E16006705BB /* MosaicResult.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; name = MosaicResult.bmp; path = LegoMosaic/MosaicResult.bmp; sourceTree = "<group>"; };
-		0674686019061F64006705BB /* InputLowRes_2.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; name = InputLowRes_2.bmp; path = LegoMosaic/InputLowRes_2.bmp; sourceTree = "<group>"; };
+		0612C067190DB72D00C74FFA /* LegoSet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LegoSet.cpp; sourceTree = "<group>"; };
+		0612C069190DB73500C74FFA /* LegoBitmap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LegoBitmap.cpp; sourceTree = "<group>"; };
+		063B12DA192683240076798B /* LegoMosaic.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LegoMosaic.h; sourceTree = "<group>"; };
+		063B12DB1926832D0076798B /* LegoMosaic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LegoMosaic.cpp; sourceTree = "<group>"; };
+		063B12DF1926EB110076798B /* CoreS2Logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = CoreS2Logo.png; path = LegoMosaic/CoreS2Logo.png; sourceTree = "<group>"; };
+		063B12E01926EB110076798B /* HelloMac.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = HelloMac.png; path = LegoMosaic/HelloMac.png; sourceTree = "<group>"; };
+		063B12E41926ED760076798B /* lodepng.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = lodepng.cpp; sourceTree = "<group>"; };
+		063B12E51926ED760076798B /* lodepng.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lodepng.h; sourceTree = "<group>"; };
+		063B12EC1927E9030076798B /* MarioBowser.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MarioBowser.png; sourceTree = "<group>"; };
+		063B12ED1927E9030076798B /* Samus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Samus.png; sourceTree = "<group>"; };
 		06D8796E1905AB0900E3E1B3 /* LegoMosaic */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = LegoMosaic; sourceTree = BUILT_PRODUCTS_DIR; };
 		06D8798E1905AB7B00E3E1B3 /* BrickDefinitions.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = BrickDefinitions.txt; path = LegoMosaic/BrickDefinitions.txt; sourceTree = "<group>"; };
-		06D8798F1905AB7B00E3E1B3 /* EasyBMP_BMP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EasyBMP_BMP.h; path = LegoMosaic/EasyBMP_BMP.h; sourceTree = "<group>"; };
-		06D879901905AB7B00E3E1B3 /* EasyBMP_DataStructures.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EasyBMP_DataStructures.h; path = LegoMosaic/EasyBMP_DataStructures.h; sourceTree = "<group>"; };
-		06D879911905AB7B00E3E1B3 /* EasyBMP_VariousBMPutilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EasyBMP_VariousBMPutilities.h; path = LegoMosaic/EasyBMP_VariousBMPutilities.h; sourceTree = "<group>"; };
-		06D879921905AB7B00E3E1B3 /* EasyBMP.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = EasyBMP.cpp; path = LegoMosaic/EasyBMP.cpp; sourceTree = "<group>"; };
-		06D879931905AB7B00E3E1B3 /* EasyBMP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EasyBMP.h; path = LegoMosaic/EasyBMP.h; sourceTree = "<group>"; };
 		06D879961905AB7B00E3E1B3 /* LegoBitmap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LegoBitmap.h; sourceTree = "<group>"; };
 		06D879971905AB7B00E3E1B3 /* LegoSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LegoSet.h; sourceTree = "<group>"; };
 		06D879991905AB7B00E3E1B3 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
@@ -60,11 +66,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		063B12DD19268B9C0076798B /* LodePNG */ = {
+			isa = PBXGroup;
+			children = (
+				063B12E41926ED760076798B /* lodepng.cpp */,
+				063B12E51926ED760076798B /* lodepng.h */,
+			);
+			name = LodePNG;
+			sourceTree = "<group>";
+		};
 		06D879651905AB0800E3E1B3 = {
 			isa = PBXGroup;
 			children = (
+				063B12DD19268B9C0076798B /* LodePNG */,
 				06D8799F1905AB8F00E3E1B3 /* Input */,
-				06D8799E1905AB8000E3E1B3 /* EasyBMP */,
 				06D879701905AB0900E3E1B3 /* LegoMosaic */,
 				06D8796F1905AB0900E3E1B3 /* Products */,
 			);
@@ -82,32 +97,24 @@
 			isa = PBXGroup;
 			children = (
 				06D879961905AB7B00E3E1B3 /* LegoBitmap.h */,
+				0612C069190DB73500C74FFA /* LegoBitmap.cpp */,
 				06D879971905AB7B00E3E1B3 /* LegoSet.h */,
-				06D879991905AB7B00E3E1B3 /* main.cpp */,
+				0612C067190DB72D00C74FFA /* LegoSet.cpp */,
 				06D8799B1905AB7B00E3E1B3 /* Vec2.h */,
+				06D879991905AB7B00E3E1B3 /* main.cpp */,
+				063B12DA192683240076798B /* LegoMosaic.h */,
+				063B12DB1926832D0076798B /* LegoMosaic.cpp */,
 			);
 			path = LegoMosaic;
-			sourceTree = "<group>";
-		};
-		06D8799E1905AB8000E3E1B3 /* EasyBMP */ = {
-			isa = PBXGroup;
-			children = (
-				06D8798F1905AB7B00E3E1B3 /* EasyBMP_BMP.h */,
-				06D879901905AB7B00E3E1B3 /* EasyBMP_DataStructures.h */,
-				06D879911905AB7B00E3E1B3 /* EasyBMP_VariousBMPutilities.h */,
-				06D879921905AB7B00E3E1B3 /* EasyBMP.cpp */,
-				06D879931905AB7B00E3E1B3 /* EasyBMP.h */,
-			);
-			name = EasyBMP;
 			sourceTree = "<group>";
 		};
 		06D8799F1905AB8F00E3E1B3 /* Input */ = {
 			isa = PBXGroup;
 			children = (
-				0674686019061F64006705BB /* InputLowRes_2.bmp */,
-				0674685F19061E16006705BB /* MosaicResult.bmp */,
-				0674685D19061DC4006705BB /* InputLowRes.bmp */,
-				067468581905ADDD006705BB /* Input.bmp */,
+				063B12EC1927E9030076798B /* MarioBowser.png */,
+				063B12ED1927E9030076798B /* Samus.png */,
+				063B12DF1926EB110076798B /* CoreS2Logo.png */,
+				063B12E01926EB110076798B /* HelloMac.png */,
 				06D8798E1905AB7B00E3E1B3 /* BrickDefinitions.txt */,
 			);
 			name = Input;
@@ -164,8 +171,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				063B12DC1926832D0076798B /* LegoMosaic.cpp in Sources */,
 				06D8799D1905AB7B00E3E1B3 /* main.cpp in Sources */,
-				06D8799C1905AB7B00E3E1B3 /* EasyBMP.cpp in Sources */,
+				063B12E61926ED760076798B /* lodepng.cpp in Sources */,
+				0612C068190DB72D00C74FFA /* LegoSet.cpp in Sources */,
+				0612C06A190DB73500C74FFA /* LegoBitmap.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

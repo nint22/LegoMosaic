@@ -3,21 +3,24 @@
  LegoBitmap - Converts BMP into a Lego Mosaic
  Copyright (c) 2014 Jeremy Bridon
 
- Main application entry point; uses the cheap
- 1x1 to 2x6 bricks, ranging in price from 10-
- cents to 40-cents each.
+ Description: Reads from the command-line parameters two
+ file paths. The first is a file containing a list of brick
+ shapes, costs, and colors. The second is the image that
+ you want to convert. The image must be a BMP, with full
+ alpha on pixels that you do not want to mosaic.
  
- Bricks are defined through data in a given
- text-file via the command line argument. It'll
- start with a number for colors, three rows of
- these colors (space delimited 0-255 values per channel).
- This is followed by a number for bricks. Each brick
- has a width and height and cost (in pennies).
+ The brick definitions file is a plain-text file that starts
+ with a number for colors, as an integer, where each rows has
+ three RGB values (space-delimited, values of 0 to 255 inclusive).
+ This is followed by a number for bricks. Each brick has a width
+ and height and cost (in pennies); these values are space-delimited.
+ Bricks that cost more than a dollar should still be written in
+ pennies: e.g. a $1.25 brick is just 125 (pennies).
 
 ***/
 
-#include "LegoBitmap.h"
-#include "LegoSet.h"
+#include <vector>
+#include "LegoMosaic.h"
 
 int main( int argc, const char * argv[] )
 {
@@ -44,12 +47,19 @@ int main( int argc, const char * argv[] )
     }
 
     // Read in all RGB colors for bricks
+    std::vector< char* > brickColorNames;
     BrickColorList brickColors;
     for( int i = 0; i < colorsCount; i++ )
     {
+        char nameBuffer[ 512 ] = "";
         int r = 0, g = 0, b = 0;
-        fscanf( file, "%d %d %d", &r, &g, &b );
-        brickColors.push_back( RGB8ToUint32( r, g, b ) );
+        fscanf( file, "%s %d %d %d", nameBuffer, &r, &g, &b );
+        
+        BrickColor color;
+        LegoBitmap::ConvertColor( r, g, b, 255, color);
+        
+        brickColorNames.push_back( strdup( nameBuffer ) );
+        brickColors.push_back( color );
     }
     
     // Read number of bricks
@@ -62,7 +72,7 @@ int main( int argc, const char * argv[] )
     
     // Read all brick shapes and cost
 	BrickDefinitionList brickDefinitions;
-    for( int i = 0; i < colorsCount; i++ )
+    for( int i = 0; i < brickCount; i++ )
     {
         int w = 0, h = 0, c = 0;
         fscanf( file, "%d %d %d", &w, &h, &c );
@@ -70,8 +80,17 @@ int main( int argc, const char * argv[] )
     }
     
 	// Load the given image
-	LegoBitmap legoBitmap( brickDefinitions, brickColors );
-	legoBitmap.Solve( argv[2] );
+	LegoMosaic legoMosaic( brickDefinitions, brickColors );
+	legoMosaic.Solve( argv[2] );
 
+    // Print the solution set's data
+    legoMosaic.PrintSolution( brickColorNames );
+    
+    // Release the strdup'ed strings
+    for( int i = 0; i < (int)brickColorNames.size(); i++ )
+    {
+        delete brickColorNames[ i ];
+    }
+    
 	return 0;
 }

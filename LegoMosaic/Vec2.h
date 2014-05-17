@@ -3,10 +3,8 @@
  LegoBitmap - Converts BMP into a Lego Mosaic
  Copyright (c) 2014 Jeremy Bridon
 
- Class Description:
- 
- Simple integer tuple; used for position and
- size.
+ Description: Simple integer tuple; used for position
+ and size.
 
 ***/
 
@@ -44,5 +42,7 @@ public:
 
 	int x, y;
 };
+
+typedef std::vector< Vec2 > Vec2List;
 
 #endif // __VEC2_H__
