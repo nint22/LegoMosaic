@@ -22,7 +22,7 @@ It converted a video game logo that had a resolution of 400 × 173 pixels in
 The result was a list of 5,170 Lego pieces (covering 21,061 pixels), costing $965.80 in parts (bulk discount not applied).
 In comparison, the "LEGO Star Wars Ultimate Collector's Millennium Falcon" has 5,922 Lego pieces costing ~$500 USD.
 
-*The following images represent given input, Mosaic conversion, and the result of the A\* Lego fill algorithm:*
+The following images represent given input, Mosaic conversion, and the result of the A\* Lego fill algorithm:
 
 ![Input; Samus from Super Metroid](https://raw.githubusercontent.com/nint22/LegoMosaic/master/Samus.png)
 ![Mosaic Conversion; Colors now match Lego colors](https://raw.githubusercontent.com/nint22/LegoMosaic/master/LegoMosaicProgress_Output.png)
