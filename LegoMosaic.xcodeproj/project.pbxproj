@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		0612C068190DB72D00C74FFA /* LegoSet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0612C067190DB72D00C74FFA /* LegoSet.cpp */; };
 		0612C06A190DB73500C74FFA /* LegoBitmap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0612C069190DB73500C74FFA /* LegoBitmap.cpp */; };
+		06198CCF19298D6B003C3348 /* DwarfIcon.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 06198CCE19298D67003C3348 /* DwarfIcon.png */; };
+		06198CD11929901D003C3348 /* SimpleTest.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 06198CD019299017003C3348 /* SimpleTest.png */; };
+		06198CD319299C40003C3348 /* Mario.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 06198CD219299C3C003C3348 /* Mario.png */; };
 		063B12DC1926832D0076798B /* LegoMosaic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 063B12DB1926832D0076798B /* LegoMosaic.cpp */; };
 		063B12E21926EB1A0076798B /* CoreS2Logo.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 063B12DF1926EB110076798B /* CoreS2Logo.png */; };
 		063B12E31926EB1C0076798B /* HelloMac.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 063B12E01926EB110076798B /* HelloMac.png */; };
@@ -26,9 +29,12 @@
 			dstPath = "";
 			dstSubfolderSpec = 6;
 			files = (
+				06198CD319299C40003C3348 /* Mario.png in CopyFiles */,
+				06198CCF19298D6B003C3348 /* DwarfIcon.png in CopyFiles */,
 				063B12EE1927E9070076798B /* MarioBowser.png in CopyFiles */,
 				063B12EF1927E9080076798B /* Samus.png in CopyFiles */,
 				0674685A1905AE29006705BB /* BrickDefinitions.txt in CopyFiles */,
+				06198CD11929901D003C3348 /* SimpleTest.png in CopyFiles */,
 				063B12E31926EB1C0076798B /* HelloMac.png in CopyFiles */,
 				063B12E21926EB1A0076798B /* CoreS2Logo.png in CopyFiles */,
 			);
@@ -39,6 +45,9 @@
 /* Begin PBXFileReference section */
 		0612C067190DB72D00C74FFA /* LegoSet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LegoSet.cpp; sourceTree = "<group>"; };
 		0612C069190DB73500C74FFA /* LegoBitmap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LegoBitmap.cpp; sourceTree = "<group>"; };
+		06198CCE19298D67003C3348 /* DwarfIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = DwarfIcon.png; path = LegoMosaic/DwarfIcon.png; sourceTree = "<group>"; };
+		06198CD019299017003C3348 /* SimpleTest.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = SimpleTest.png; path = LegoMosaic/SimpleTest.png; sourceTree = "<group>"; };
+		06198CD219299C3C003C3348 /* Mario.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Mario.png; sourceTree = "<group>"; };
 		063B12DA192683240076798B /* LegoMosaic.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LegoMosaic.h; sourceTree = "<group>"; };
 		063B12DB1926832D0076798B /* LegoMosaic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LegoMosaic.cpp; sourceTree = "<group>"; };
 		063B12DF1926EB110076798B /* CoreS2Logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = CoreS2Logo.png; path = LegoMosaic/CoreS2Logo.png; sourceTree = "<group>"; };
@@ -111,6 +120,9 @@
 		06D8799F1905AB8F00E3E1B3 /* Input */ = {
 			isa = PBXGroup;
 			children = (
+				06198CD219299C3C003C3348 /* Mario.png */,
+				06198CD019299017003C3348 /* SimpleTest.png */,
+				06198CCE19298D67003C3348 /* DwarfIcon.png */,
 				063B12EC1927E9030076798B /* MarioBowser.png */,
 				063B12ED1927E9030076798B /* Samus.png */,
 				063B12DF1926EB110076798B /* CoreS2Logo.png */,

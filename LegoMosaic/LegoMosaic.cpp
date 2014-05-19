@@ -7,7 +7,7 @@
 
 #include "LegoMosaic.h"
 
-#include <queue>
+#include <deque>
 
 LegoMosaic::LegoMosaic( const BrickDefinitionList& brickDefinitions, const BrickColorList& brickColors )
     : m_brickDefinitions( brickDefinitions )
@@ -97,7 +97,10 @@ void LegoMosaic::Solve( const char* fileName, bool useBruteForce )
                 sprintf( fileName, "LegoMosaicProgress_%05d.png", searchDepth );
                 legoBitmap.SavePng( fileName, m_brickDefinitions, m_brickColors, legoSet );
                 
-                printf( "At search depth %d\n", searchDepth );
+                if( legoBitmap.GetMosaicPegCount() > 0 )
+                {
+                    printf( "Progress: %%%.2f, at search depth %d\n", ( float( legoSet.GetPlacedPegCount() ) / float( legoBitmap.GetMosaicPegCount() ) * 100.0f ), searchDepth );
+                }
             }
             else
             {
@@ -111,16 +114,22 @@ void LegoMosaic::Solve( const char* fileName, bool useBruteForce )
     // 2b. Breadth-first exhaustive search
     else
     {
-        std::queue< LegoSet > workingQueue;
+        std::deque< LegoSet > workingQueue;
         std::vector< LegoSet > solutionList;
+        
+        // Start with empty base case
+        LegoSet legoSet( m_boardSize, brickList, m_brickDefinitions );
+        workingQueue.push_back( legoSet );
+        
+        uint64_t searchStepCount = 0;
         
         while( !workingQueue.empty() )
         {
             // Pop off this lego set and grow it
-            LegoSet legoSet = workingQueue.back();
-            workingQueue.pop();
+            LegoSet legoSet = workingQueue.front();
+            workingQueue.pop_front();
             
-            Vec2List nextPositions = GetNextPositions( legoSet, legoBitmap );
+            Vec2List nextPositions = GetNextPositions( legoSet, legoBitmap, searchStepCount > 0 );
             
             // For each 1. Position, 2. Brick type
             // Note that the color isn't searched; we just sample the position
@@ -134,17 +143,30 @@ void LegoMosaic::Solve( const char* fileName, bool useBruteForce )
                     Brick testBrick( defIndex, colorIndex, nextPosition );
                     LegoSet testSet( legoSet );
                     
-                    // If valid position *and* has a better rank...
+                    // If valid position, put into queue for further work
+                    searchStepCount++;
                     if( testSet.AddBrick( testBrick, m_brickDefinitions, legoBitmap ) )
                     {
+                        if( legoBitmap.GetMosaicPegCount() > 0 )
+                        {
+                            printf( "Progress: %%%.2f, at search depth %d, search count %lld\n", ( float( testSet.GetPlacedPegCount() ) / float( legoBitmap.GetMosaicPegCount() ) ) * 100.0f, (int)testSet.GetBrickList().size(), searchStepCount );
+                        }
+                        
                         // If valid solution, save it, else push back to queue
                         if( IsSolved( testSet, legoBitmap ) )
                         {
                             solutionList.push_back( testSet );
+                            
+                            printf( "Found a solution; brick-count: %d, cost: $%d.%d\n", (int)testSet.GetBrickList().size(), testSet.GetCost(), testSet.GetCost() % 100 );
+                            
+                            // Draw out this solution; so we can track which solution ID maps to output
+                            char fileName[ 512 ];
+                            sprintf( fileName, "LegoMosaicProgress_%05d.png", searchStepCount );
+                            legoBitmap.SavePng( fileName, m_brickDefinitions, m_brickColors, testSet );
                         }
                         else
                         {
-                            workingQueue.push( testSet );
+                            workingQueue.push_back( testSet );
                         }
                     }
                 }
@@ -239,7 +261,7 @@ void LegoMosaic::PrintSolution( const std::vector< char* > brickColorNames )
     printf( "> Total cost: $%d.%d\n", m_solutionSet->GetCost() / 100, m_solutionSet->GetCost() % 100 );
 }
 
-Vec2List LegoMosaic::GetNextPositions( const LegoSet& legoSet, const LegoBitmap& legoBitmap )
+Vec2List LegoMosaic::GetNextPositions( const LegoSet& legoSet, const LegoBitmap& legoBitmap, bool onlyAppend  )
 {
     // This is a bit expensive: basically we're doing edge-detection, where a pixel on an unplaced peg,
     // if it is directly adjacent to a placed lego piece *or* image edge, is pushed to this list and returned
@@ -269,10 +291,21 @@ Vec2List LegoMosaic::GetNextPositions( const LegoSet& legoSet, const LegoBitmap&
             for( int i = 0; i < 4; i++ )
             {
                 Vec2 adjPos( pos.x + cOffsets[ i ].x, pos.y + cOffsets[ i ].y );
-
-                // Bounds check and enqueue if next to lego piece or invalid color
-                if( adjPos.x >= 0 && adjPos.y >= 0 && adjPos.x < m_boardSize.x && adjPos.y < m_boardSize.y &&
-                    ( legoSet.IsPegOccupied( adjPos ) || legoBitmap.GetBrickColorIndex( adjPos ) < 0 ) )
+                
+                bool inBoard = adjPos.x >= 0 && adjPos.y >= 0 && adjPos.x < m_boardSize.x && adjPos.y < m_boardSize.y;
+                bool pegOccupied = inBoard && legoSet.IsPegOccupied( adjPos );
+                bool pegHasColor = inBoard && legoBitmap.GetBrickColorIndex( adjPos ) < 0;
+                
+                // Only test if adjacent to other Lego bricks
+                if( onlyAppend && pegOccupied )
+                {
+                    // Save and stop searching
+                    edgePositions.push_back( pos );
+                    return;
+                }
+                
+                // Only test if adjacent to other Lego bricks or next to an empty pixel
+                else if( !onlyAppend && ( !inBoard || pegOccupied || pegHasColor ) )
                 {
                     // Save and stop searching
                     edgePositions.push_back( pos );

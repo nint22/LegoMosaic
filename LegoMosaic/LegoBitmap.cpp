@@ -11,6 +11,7 @@
 
 LegoBitmap::LegoBitmap( const char* fileName )
     : m_boardSize( 0, 0 )
+    , m_validPegs( 0 )
 {
     unsigned int width;
     unsigned int height;
@@ -43,6 +44,7 @@ LegoBitmap::LegoBitmap( const LegoBitmap& legoBitmap )
     m_boardSize = legoBitmap.m_boardSize;
     m_pngBuffer = legoBitmap.m_pngBuffer;
     m_colorIndices = legoBitmap.m_colorIndices;
+    m_validPegs = legoBitmap.m_validPegs;
 }
 
 LegoBitmap::~LegoBitmap()
@@ -66,6 +68,11 @@ bool LegoBitmap::ConvertMosaic( const BrickColorList& brickColorList )
             // Convert image to color index
             const BrickColor& color = m_pngBuffer[ pos.y * m_boardSize.x + pos.x ];
             int bestColorIndex = MatchColorToColorIndex( brickColorList, color );
+            
+            if( bestColorIndex >= 0 )
+            {
+                m_validPegs++;
+            }
             
             // Save to internal buffer if non-zero
             int pegIndex = pos.y * m_boardSize.x + pos.x;

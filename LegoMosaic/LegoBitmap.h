@@ -55,6 +55,9 @@ public:
     void SavePng( const char* fileName, const BrickColorList& brickColorList ) const;
 	void SavePng( const char* fileName, const BrickDefinitionList& brickDefinitions, const BrickColorList& brickColors, const LegoSet& legoSet, int tileSize = 5 ) const;
     
+    // Get the number of valid pegs (pegs with full-alpha, after mosaic)
+    int GetMosaicPegCount() const { return m_validPegs; }
+    
     // Set of helpful color conversion functions
     static void ConvertColor( int r, int g, int b, int a, BrickColor& dst );
     static void ConvertColor( const BrickColor& src, int* rOut, int* gOut, int* bOut, int* aOut );
@@ -77,6 +80,9 @@ private:
     // Note that both arrays are parallel, though the m_colorIndices maps to the given brickColorList
     std::vector< BrickColor > m_pngBuffer;
     std::vector< int > m_colorIndices;
+    
+    // Number of valid pegs; only valid after mosaic conversion function call
+    int m_validPegs;
     
 };
 

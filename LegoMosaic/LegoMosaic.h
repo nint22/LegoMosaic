@@ -39,7 +39,8 @@ public:
 protected:
     
     // Return a list of positions that are on the edge of placed lego pieces or image edge
-    Vec2List GetNextPositions( const LegoSet& legoSet, const LegoBitmap& legoBitmap );
+    // The "onlyAppend" flag means that positions are only generated next to already placed Lego pegs
+    Vec2List GetNextPositions( const LegoSet& legoSet, const LegoBitmap& legoBitmap, bool onlyAppend = false );
     
     // Returns true if all colors are covered by bricks
     bool IsSolved( const LegoSet& legoSet, const LegoBitmap& legoBitmap );

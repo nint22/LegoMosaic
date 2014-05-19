@@ -85,6 +85,7 @@ public:
 	// Cost of the brick list in pennies
 	int GetCost() const { return m_cost; }
     float GetRank() const { return float( m_cost ) / float( m_pegCount ); }
+    float GetPlacedPegCount() const { return m_pegCount; }
     
 protected:
     

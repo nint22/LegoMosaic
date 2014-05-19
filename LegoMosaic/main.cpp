@@ -24,10 +24,10 @@
 
 int main( int argc, const char * argv[] )
 {
-    // Must have a brick def. file name
-    if( argc != 3 )
+    // Must have a brick def. file name, image name, then optional "-bruteforce" argument
+    if( argc != 3 && argc != 4 )
     {
-        printf( "Example usage: ./LegoBitmap BrickDefinitions.txt Input.bmp\n" );
+        printf( "Example usage: ./LegoBitmap BrickDefinitions.txt Input.bmp <-bruteforce>\n" );
         return 0;
     }
     
@@ -79,9 +79,11 @@ int main( int argc, const char * argv[] )
         brickDefinitions.push_back( BrickDefinition( i, Vec2( w, h ), c ) );
     }
     
-	// Load the given image
+    bool useBruteForce = ( argv[ 3 ] != NULL ) && ( strcmp( argv[ 3 ], "-bruteforce" ) == 0 );
+    
+   	// Load the given image
 	LegoMosaic legoMosaic( brickDefinitions, brickColors );
-	legoMosaic.Solve( argv[2] );
+	legoMosaic.Solve( argv[2], useBruteForce );
 
     // Print the solution set's data
     legoMosaic.PrintSolution( brickColorNames );
