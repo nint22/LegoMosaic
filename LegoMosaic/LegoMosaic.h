@@ -31,7 +31,7 @@ public:
     ~LegoMosaic();
     
     // Solve, doing an A* search algorithm
-    void Solve( const char* fileName, bool useBruteForce = false );
+    void Solve( const char* fileName, bool saveProgress = false, bool useBruteForce = false );
     
     // Print the purchase order / parts list
     void PrintSolution( const std::vector< char* > brickColorNames );

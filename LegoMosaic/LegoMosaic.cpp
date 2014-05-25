@@ -22,7 +22,7 @@ LegoMosaic::~LegoMosaic()
     delete m_solutionSet;
 }
 
-void LegoMosaic::Solve( const char* fileName, bool useBruteForce )
+void LegoMosaic::Solve( const char* fileName, bool saveProgress, bool useBruteForce )
 {
     // 1. Load the image
     LegoBitmap legoBitmap( fileName );
@@ -93,9 +93,12 @@ void LegoMosaic::Solve( const char* fileName, bool useBruteForce )
                 // Show progress: write it out to memory
                 int searchDepth = (int)legoSet.GetBrickList().size();
                 
-                char fileName[ 512 ];
-                sprintf( fileName, "LegoMosaicProgress_%05d.png", searchDepth );
-                legoBitmap.SavePng( fileName, m_brickDefinitions, m_brickColors, legoSet );
+                if( saveProgress )
+                {
+                    char fileName[ 512 ];
+                    sprintf( fileName, "LegoMosaicProgress_%05d.png", searchDepth );
+                    legoBitmap.SavePng( fileName, m_brickDefinitions, m_brickColors, legoSet );
+                }
                 
                 if( legoBitmap.GetMosaicPegCount() > 0 )
                 {
@@ -160,9 +163,12 @@ void LegoMosaic::Solve( const char* fileName, bool useBruteForce )
                             printf( "Found a solution; brick-count: %d, cost: $%d.%d\n", (int)testSet.GetBrickList().size(), testSet.GetCost(), testSet.GetCost() % 100 );
                             
                             // Draw out this solution; so we can track which solution ID maps to output
-                            char fileName[ 512 ];
-                            sprintf( fileName, "LegoMosaicProgress_%05d.png", searchStepCount );
-                            legoBitmap.SavePng( fileName, m_brickDefinitions, m_brickColors, testSet );
+                            if( saveProgress )
+                            {
+                                char fileName[ 512 ];
+                                sprintf( fileName, "LegoMosaicProgress_%05d.png", int( searchStepCount ) );
+                                legoBitmap.SavePng( fileName, m_brickDefinitions, m_brickColors, testSet );
+                            }
                         }
                         else
                         {
@@ -198,7 +204,13 @@ void LegoMosaic::Solve( const char* fileName, bool useBruteForce )
         }
     }
     
-    // 3. Print parts list, with price
+    // Write out solution
+    if( m_solutionSet != NULL )
+    {
+        legoBitmap.SavePng( "LegoMosaicProgress_Result.png", m_brickDefinitions, m_brickColors, *m_solutionSet );
+    }
+    
+    // 3. Print parts list, with price; deffers to PrintSolution(...)
     
 }
 

@@ -16,6 +16,10 @@
  and height and cost (in pennies); these values are space-delimited.
  Bricks that cost more than a dollar should still be written in
  pennies: e.g. a $1.25 brick is just 125 (pennies).
+ 
+ General usage:
+ 
+ ./legomosaic [brick definitions *.txt] [input pictures *.png] <-bruteforce> <-saveprogress>
 
 ***/
 
@@ -24,14 +28,29 @@
 
 int main( int argc, const char * argv[] )
 {
-    // Must have a brick def. file name, image name, then optional "-bruteforce" argument
-    if( argc != 3 && argc != 4 )
+    bool drawProgress = false;
+    bool bruteForce = false;
+    
+    // Min args: ./legomosaic
+    if( argc < 3 )
     {
-        printf( "Example usage: ./LegoBitmap BrickDefinitions.txt Input.bmp <-bruteforce>\n" );
-        return 0;
+        printf( "./legomosaic [brick definitions *.txt] [input pictures *.png] <-bruteforce> <-saveprogress>\n" );
     }
     
-    FILE* file = fopen( argv[1], "r" );
+    // Save def. file name and given png file
+    const char* definitionFileName = argv[ 1 ];
+    const char* pngFileName = argv[ 2 ];
+    
+    // Get any other args
+    for( int i = 3; i < argc; i++ )
+    {
+        // Just some minimized code: if( argv[i] == flagString ) flag = true; ignore all else
+        drawProgress |= ( drawProgress == true ) || ( strcmp( argv[ i ], "-drawprogress" ) == 0 );
+        bruteForce |= ( bruteForce == true ) || ( strcmp( argv[ i ], "-bruteforce" ) == 0 );
+    }
+    
+    // Attempt loading
+    FILE* file = fopen( definitionFileName, "r" );
     if( file == NULL )
     {
         printf( "Error: Unable to open the given file \"%s\"\n", argv[1] );
@@ -79,12 +98,10 @@ int main( int argc, const char * argv[] )
         brickDefinitions.push_back( BrickDefinition( i, Vec2( w, h ), c ) );
     }
     
-    bool useBruteForce = ( argv[ 3 ] != NULL ) && ( strcmp( argv[ 3 ], "-bruteforce" ) == 0 );
-    
    	// Load the given image
 	LegoMosaic legoMosaic( brickDefinitions, brickColors );
-	legoMosaic.Solve( argv[2], useBruteForce );
-
+	legoMosaic.Solve( pngFileName, drawProgress, bruteForce );
+    
     // Print the solution set's data
     legoMosaic.PrintSolution( brickColorNames );
     
