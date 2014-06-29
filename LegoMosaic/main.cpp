@@ -19,7 +19,7 @@
  
  General usage:
  
- ./legomosaic [brick definitions *.txt] [input pictures *.png] <-bruteforce> <-saveprogress> <-nothreading>
+ ./legomosaic [brick definitions *.txt] [input pictures *.png] <-bruteforce> <-saveprogress> <-nothreading> <-dither>
 
 ***/
 
@@ -33,11 +33,12 @@ int main( int argc, const char * argv[] )
     bool drawProgress = false;
     bool bruteForce = false;
     bool noThreading = false;
+    bool dither = false;
     
     // Min args: ./legomosaic
     if( argc < 3 )
     {
-        printf( "./legomosaic [brick definitions *.txt] [input pictures *.png] <-bruteforce> <-saveprogress> <-nothreading>\n" );
+        printf( "./legomosaic [brick definitions *.txt] [input pictures *.png] <-bruteforce> <-saveprogress> <-nothreading> <-dither>\n" );
     }
     
     // Save def. file name and given png file
@@ -51,6 +52,7 @@ int main( int argc, const char * argv[] )
         drawProgress |= ( drawProgress == true ) || ( strcmp( argv[ i ], "-saveprogress" ) == 0 );
         bruteForce |= ( bruteForce == true ) || ( strcmp( argv[ i ], "-bruteforce" ) == 0 );
         noThreading |= ( bruteForce == true ) || ( strcmp( argv[ i ], "-nothreading" ) == 0 );
+        dither |= ( bruteForce == true ) || ( strcmp( argv[ i ], "-dither" ) == 0 );
     }
     
     // Attempt loading
@@ -108,7 +110,7 @@ int main( int argc, const char * argv[] )
     
    	// Load the given image
 	LegoMosaic legoMosaic( brickDefinitions, brickColors );
-	legoMosaic.Solve( pngFileName, drawProgress, bruteForce, !noThreading );
+	legoMosaic.Solve( pngFileName, drawProgress, bruteForce, !noThreading, dither );
     
     // Measure time
     end = std::chrono::system_clock::now();

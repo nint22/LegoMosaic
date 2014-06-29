@@ -49,11 +49,11 @@ LegoMosaic::~LegoMosaic()
     delete m_solutionSet;
 }
 
-void LegoMosaic::Solve( const char* fileName, bool saveProgress, bool useBruteForce, bool useThreading )
+void LegoMosaic::Solve( const char* fileName, bool saveProgress, bool useBruteForce, bool useThreading, bool dither )
 {
     // 1. Load the image
     LegoBitmap legoBitmap( fileName );
-    if( legoBitmap.ConvertMosaic( m_brickColors ) == false )
+    if( legoBitmap.ConvertMosaic( m_brickColors, dither ) == false )
     {
         printf( "Unable to convert the given file \"%s\" to the given Lego colors\n", fileName ? fileName : NULL );
     }

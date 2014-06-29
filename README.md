@@ -22,11 +22,11 @@ It converted a video game logo that had a resolution of 400 × 173 pixels in
 The result was a list of 5,170 Lego pieces (covering 21,061 pixels), costing $965.80 in parts (bulk discount not applied).
 In comparison, the "LEGO Star Wars Ultimate Collector's Millennium Falcon" has 5,922 Lego pieces costing ~$500 USD.
 
-The following images represent given input, Mosaic conversion, and the result of the A\* Lego fill algorithm:
+The following images represent given input, Mosaic conversion, and the result of the A\* Lego fill algorithm (other examples at bottom):
 
 ![Input; Samus from Super Metroid](https://raw.githubusercontent.com/nint22/LegoMosaic/master/Samus.png)
-![Mosaic Conversion; Colors now match Lego colors](https://raw.githubusercontent.com/nint22/LegoMosaic/master/LegoMosaicProgress_Output.png)
-![Lego Conversion; Samus now built out of Lego plates / bricks](https://raw.githubusercontent.com/nint22/LegoMosaic/master/LegoMosaicProgress_00361.png)
+![Mosaic Conversion; Colors now match Lego colors](https://raw.githubusercontent.com/nint22/LegoMosaic/master/SamusMosaic.png)
+![Lego Conversion; Samus now built out of Lego plates / bricks](https://raw.githubusercontent.com/nint22/LegoMosaic/master/SamusMosaic_BuildInstructions.png)
 
 Video link of converting a Mario / Bowser image: [YouTube Link](https://www.youtube.com/watch?v=ECu_di70cPY). Video for Samus: [YouTube Link](https://www.youtube.com/watch?v=dZAf6Xowgn8).
 
@@ -173,3 +173,9 @@ CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+
+![Original image](https://raw.githubusercontent.com/nint22/LegoMosaic/master/ThumbsUp.png)
+![Mosaic Conversion; Colors now match Lego colors](https://raw.githubusercontent.com/nint22/LegoMosaic/master/ThumbsUpMosaic.png)
+![Lego Conversion; Samus now built out of Lego plates / bricks](https://raw.githubusercontent.com/nint22/LegoMosaic/master/ThumbsUpMosaic_BuildInstructions.png)
+![Mosaic Dither Conversion; Colors now match Lego colors](https://raw.githubusercontent.com/nint22/LegoMosaic/master/ThumbsUpMosaicDither.png)
+![Lego Dither Conversion; Samus now built out of Lego plates / bricks](https://raw.githubusercontent.com/nint22/LegoMosaic/master/ThumbsUpMosaicDither_BuildInstructions.png)

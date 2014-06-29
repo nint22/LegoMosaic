@@ -9,6 +9,23 @@
 
 #include "lodepng.h"
 
+// Dither Bayer matrix from wikipedia:
+// en.wikipedia.org/wiki/Ordered_dithering
+namespace
+{
+    const float cDitherDivFactor = 128.0f;
+    const float cDitherMatrix[ 8 ][ 8 ] = {
+        { 1.0f / cDitherDivFactor, 49.0f / cDitherDivFactor, 13.0f / cDitherDivFactor, 61.0f / cDitherDivFactor,  4.0f / cDitherDivFactor, 52.0f / cDitherDivFactor, 16.0f / cDitherDivFactor, 64.0f / cDitherDivFactor, },
+        { 33.0f / cDitherDivFactor, 17.0f / cDitherDivFactor, 45.0f / cDitherDivFactor, 29.0f / cDitherDivFactor, 36.0f / cDitherDivFactor, 20.0f / cDitherDivFactor, 48.0f / cDitherDivFactor, 32.0f / cDitherDivFactor, },
+        { 9.0f / cDitherDivFactor, 57.0f / cDitherDivFactor,  5.0f / cDitherDivFactor, 53.0f / cDitherDivFactor, 12.0f / cDitherDivFactor, 60.0f / cDitherDivFactor,  8.0f / cDitherDivFactor, 56.0f / cDitherDivFactor, },
+        { 41.0f / cDitherDivFactor, 25.0f / cDitherDivFactor, 37.0f / cDitherDivFactor, 21.0f / cDitherDivFactor, 44.0f / cDitherDivFactor, 28.0f / cDitherDivFactor, 40.0f / cDitherDivFactor, 24.0f / cDitherDivFactor, },
+        { 3.0f / cDitherDivFactor, 51.0f / cDitherDivFactor, 15.0f / cDitherDivFactor, 63.0f / cDitherDivFactor,  2.0f / cDitherDivFactor, 50.0f / cDitherDivFactor, 14.0f / cDitherDivFactor, 62.0f / cDitherDivFactor, },
+        { 35.0f / cDitherDivFactor, 19.0f / cDitherDivFactor, 47.0f / cDitherDivFactor, 31.0f / cDitherDivFactor, 34.0f / cDitherDivFactor, 18.0f / cDitherDivFactor, 46.0f / cDitherDivFactor, 30.0f / cDitherDivFactor, },
+        { 11.0f / cDitherDivFactor, 59.0f / cDitherDivFactor,  7.0f / cDitherDivFactor, 55.0f / cDitherDivFactor, 10.0f / cDitherDivFactor, 58.0f / cDitherDivFactor,  6.0f / cDitherDivFactor, 54.0f / cDitherDivFactor, },
+        { 43.0f / cDitherDivFactor, 27.0f / cDitherDivFactor, 39.0f / cDitherDivFactor, 23.0f / cDitherDivFactor, 42.0f / cDitherDivFactor, 26.0f / cDitherDivFactor, 38.0f / cDitherDivFactor, 22.0f / cDitherDivFactor, },
+    };
+}
+
 LegoBitmap::LegoBitmap( const char* fileName )
     : m_boardSize( 0, 0 )
     , m_validPegs( 0 )
@@ -52,7 +69,7 @@ LegoBitmap::~LegoBitmap()
 	// ...
 }
 
-bool LegoBitmap::ConvertMosaic( const BrickColorList& brickColorList )
+bool LegoBitmap::ConvertMosaic( const BrickColorList& brickColorList, bool dither )
 {
     if( m_pngBuffer.size() <= 0 )
     {
@@ -66,12 +83,22 @@ bool LegoBitmap::ConvertMosaic( const BrickColorList& brickColorList )
 	IterateBoard( [&](Vec2 pos)
         {
             // Convert image to color index
-            const BrickColor& color = m_pngBuffer[ pos.y * m_boardSize.x + pos.x ];
+            BrickColor color = m_pngBuffer[ pos.y * m_boardSize.x + pos.x ];
             int bestColorIndex = MatchColorToColorIndex( brickColorList, color );
             
             if( bestColorIndex >= 0 )
             {
                 m_validPegs++;
+                
+                // Dither if needed
+                if( dither )
+                {
+                    BrickColor brickColor = brickColorList.at( bestColorIndex );
+                    DitherColor( pos, brickColor );
+                    
+                    // Re-map to the best color
+                    bestColorIndex = MatchColorToColorIndex( brickColorList, brickColor );
+                }
             }
             
             // Save to internal buffer if non-zero
@@ -288,4 +315,27 @@ void LegoBitmap::IterateBoard( std::function< void(Vec2) > func ) const
 			func( Vec2( x, y ) );
 		}
 	}
+}
+
+void LegoBitmap::DitherColor( const Vec2& pos, BrickColor& colorInOut )
+{
+    // Convert to float
+    int r, g, b, a;
+    ConvertColor( colorInOut, &r, &g, &b, &a );
+    
+    float fr = float( r ) / 255.0f;
+    float fg = float( g ) / 255.0f;
+    float fb = float( b ) / 255.0f;
+    
+    // Add threshold
+    fr = fr - fr * cDitherMatrix[ pos.x % 8 ][ pos.y % 8 ];
+    fg = fg - fg * cDitherMatrix[ pos.x % 8 ][ pos.y % 8 ];
+    fb = fb - fb * cDitherMatrix[ pos.x % 8 ][ pos.y % 8 ];
+    
+    // Convert back to bytes
+    r = int( fr * 255.0f );
+    g = int( fg * 255.0f );
+    b = int( fb * 255.0f );
+    
+    ConvertColor( r, g, b, a, colorInOut );
 }

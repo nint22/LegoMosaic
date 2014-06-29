@@ -45,7 +45,7 @@ public:
     const Vec2& GetBoardSize() const { return m_boardSize; }
     
     // Converts pixel buffer to best-matched mosaic colors; return false on failure (no image loaded, no colors, etc.)
-    bool ConvertMosaic( const BrickColorList& brickColorList );
+    bool ConvertMosaic( const BrickColorList& brickColorList, bool dither = false );
     
     // Get the brick color index at the given; returns -1 on alpha or when not yet converted to mosaic
     const BrickColor& GetBrickColor( const Vec2& pegPos ) const;
@@ -69,6 +69,9 @@ protected:
     
     // Helpful for drawing / pixel parsing
     void IterateBoard( std::function< void(Vec2) > func ) const;
+    
+    // Dithers color by using baysian ordered dithering
+    void DitherColor( const Vec2& pos, BrickColor& colorInOut );
     
 private:
     
