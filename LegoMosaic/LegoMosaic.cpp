@@ -8,13 +8,40 @@
 #include "LegoMosaic.h"
 
 #include <deque>
+#include <thread>
+#include <cstdlib>
+
+int BrickDefinitionCompare( const void* b0, const void* b1 )
+{
+    BrickDefinition* brick0 = (BrickDefinition*)b0;
+    BrickDefinition* brick1 = (BrickDefinition*)b1;
+    return ( float( brick0->m_cost ) / float( brick0->m_shape.x * brick0->m_shape.y ) ) - ( float( brick1->m_cost ) / float( brick1->m_shape.x * brick1->m_shape.y ) );
+}
 
 LegoMosaic::LegoMosaic( const BrickDefinitionList& brickDefinitions, const BrickColorList& brickColors )
     : m_brickDefinitions( brickDefinitions )
     , m_brickColors( brickColors )
     , m_solutionSet( NULL )
 {
+    // Duplicate the entire array to suppoert flipped orientation
+    int count = (int)m_brickDefinitions.size();
+    for( int i = 0; i < count; i++ )
+    {
+        // Any non-uniform shape def..
+        const BrickDefinition& brickDef = m_brickDefinitions.at( i );
+        if( brickDef.m_shape.x != brickDef.m_shape.y )
+        {
+            BrickDefinition newDef( brickDef );
+            newDef.m_definitionId = (int)m_brickDefinitions.size();
+            newDef.m_shape = Vec2( newDef.m_shape.y, newDef.m_shape.x );
+            
+            m_brickDefinitions.push_back( newDef );
+        }
+    }
     
+    // Note that we should sort our bricks to be based on relative peg / cost unit
+    // I'm aware qsort is *not* to be mixed with C++, but std::swap requires tons of overhead code for not much gain
+    std::qsort( (void*)&brickDefinitions[0], brickDefinitions.size(), sizeof( BrickDefinition ), BrickDefinitionCompare );
 }
 
 LegoMosaic::~LegoMosaic()
@@ -22,7 +49,7 @@ LegoMosaic::~LegoMosaic()
     delete m_solutionSet;
 }
 
-void LegoMosaic::Solve( const char* fileName, bool saveProgress, bool useBruteForce )
+void LegoMosaic::Solve( const char* fileName, bool saveProgress, bool useBruteForce, bool useThreading )
 {
     // 1. Load the image
     LegoBitmap legoBitmap( fileName );
@@ -38,7 +65,7 @@ void LegoMosaic::Solve( const char* fileName, bool saveProgress, bool useBruteFo
     m_solutionSet = new LegoSet( m_boardSize, brickList, m_brickDefinitions );
     
     // 2a. A* searching algorithm
-    if( !useBruteForce )
+    if( useBruteForce == false )
     {
         // Empty starting state
         LegoSet legoSet( m_boardSize, brickList, m_brickDefinitions );
@@ -48,35 +75,97 @@ void LegoMosaic::Solve( const char* fileName, bool saveProgress, bool useBruteFo
         {
             Vec2List nextPositions = GetNextPositions( legoSet, legoBitmap );
             
-            // Search this breadth; arbitrary (bad) initial rank
+            // Search this breadth; arbitrary (invalid) initial rank
+            std::mutex bestDataLock;
             int bestDefinitionIndex = -1;
             Vec2 bestPosition;
             float bestRank = 9999999.0f;
             
-            // For each 1. Position, 2. Brick type
-            // TODO: 3. brick orientation (not just horizontal vs. vertical, but rotate on corner)
+            // Enqueue all of these search depths as threads..
+            std::vector< std::thread > searchThreads;
+            int maxThreadCount = std::thread::hardware_concurrency();
+            int threadCount = 0;
+            
+            // For each 1. Position, 2. Brick type, 3. Brick orientation
             // Note that the color isn't searched; we just sample the position
             for( int posIndex = 0; posIndex < (int)nextPositions.size(); posIndex++ )
             {
-                const Vec2& nextPosition = nextPositions[ posIndex ];
+                Vec2 nextPosition = nextPositions[ posIndex ];
                 
-                for( int defIndex = 0; defIndex < (int)m_brickDefinitions.size(); defIndex++ )
-                {
-                    int colorIndex = legoBitmap.GetBrickColorIndex( nextPosition );
-                    Brick testBrick( defIndex, colorIndex, nextPosition );
-                    LegoSet testSet( legoSet );
+                std::function< void() > workFunc = [=, &bestDataLock, &bestRank, &bestPosition, &bestDefinitionIndex]() {
                     
-                    // If valid position *and* has a better rank...
-                    if( testSet.AddBrick( testBrick, m_brickDefinitions, legoBitmap ) )
+                    for( int defIndex = 0; defIndex < (int)m_brickDefinitions.size(); defIndex++ )
                     {
-                        float newRank = testSet.GetRank();
-                        if( newRank < bestRank )
+                        // Given the color and the brick type we want..
+                        int colorIndex = legoBitmap.GetBrickColorIndex( nextPosition );
+                        BrickDefinition& brickDef = m_brickDefinitions.at( defIndex );
+                        
+                        // Move the brick in all four cardinal directions, since this position might have
+                        // more empty space in any of the four corners..
+                        Vec2 brickSize = brickDef.m_shape;
+                        Vec2 positionOffset[ 4 ] = {
+                            Vec2( 0, 0 ),
+                            Vec2( -brickSize.x + 1, 0 ),
+                            Vec2( 0, -brickSize.y + 1 ),
+                            Vec2( -brickSize.x + 1, -brickSize.y + 1 ),
+                        };
+                        
+                        for( int orientation = 0; orientation < 4; orientation++ )
                         {
-                            bestRank = newRank;
-                            bestPosition = nextPosition;
-                            bestDefinitionIndex = defIndex;
+                            Vec2 newPos( nextPosition.x + positionOffset[ orientation ].x, nextPosition.y + positionOffset[ orientation ].y );
+                            Brick testBrick( defIndex, colorIndex, newPos );
+                            LegoSet testSet( legoSet );
+                            
+                            // If valid position *and* has a better rank...
+                            if( testSet.AddBrick( testBrick, m_brickDefinitions, legoBitmap ) )
+                            {
+                                std::lock_guard< std::mutex > guard( bestDataLock );
+                                
+                                float newRank = testSet.GetRank();
+                                if( newRank < bestRank )
+                                {
+                                    bestRank = newRank;
+                                    bestPosition = newPos;
+                                    bestDefinitionIndex = defIndex;
+                                }
+                            }
+                            
+                        } // .. For each orientation
+                    } // ... For each brick definition
+                };
+                
+                // Each thread uses the same position but tried different bricks..
+                if( useThreading )
+                {
+                    threadCount++;
+                    searchThreads.push_back( std::thread( workFunc ) );
+                    
+                    // If we hit the max number of threads, join them
+                    if( threadCount >= maxThreadCount )
+                    {
+                        int count = threadCount;
+                        for( int i = count - 1; i >= 0; i-- )
+                        {
+                            searchThreads.at( i ).join();
+                            searchThreads.pop_back();
+                            threadCount--;
                         }
                     }
+                }
+                else
+                {
+                    workFunc();
+                }
+            }
+            
+            if( useThreading )
+            {
+                // Wait for all the rest to finish
+                int count = threadCount;
+                for( int i = count - 1; i >= 0; i-- )
+                {
+                    searchThreads.at( i ).join();
+                    searchThreads.pop_back();
                 }
             }
             
@@ -87,7 +176,11 @@ void LegoMosaic::Solve( const char* fileName, bool saveProgress, bool useBruteFo
                 int colorIndex = legoBitmap.GetBrickColorIndex( bestPosition );
                 Brick brick( bestDefinitionIndex, colorIndex, bestPosition );
                 
-                legoSet.AddBrick( brick, m_brickDefinitions, legoBitmap );
+                if( legoSet.AddBrick( brick, m_brickDefinitions, legoBitmap ) == false )
+                {
+                    printf( "Critical error: unable to place a brick that was verified good\n" );
+                }
+                
                 *m_solutionSet = legoSet;
                 
                 // Show progress: write it out to memory

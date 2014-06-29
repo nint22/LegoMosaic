@@ -84,8 +84,10 @@ public:
     
 	// Cost of the brick list in pennies
 	int GetCost() const { return m_cost; }
-    float GetRank() const { return float( m_cost ) / float( m_pegCount ); }
     float GetPlacedPegCount() const { return m_pegCount; }
+    
+    // Note that rank is the heuristic used when searching; lower peg count is more important than price
+    float GetRank() const { return - ( float( m_pegCount ) / float( m_brickList.size() ) ) * 100.0f - float( m_cost ); }
     
 protected:
     

@@ -30,8 +30,8 @@ public:
     LegoMosaic( const BrickDefinitionList& brickDefinitions, const BrickColorList& brickColors );
     ~LegoMosaic();
     
-    // Solve, doing an A* search algorithm
-    void Solve( const char* fileName, bool saveProgress = false, bool useBruteForce = false );
+    // Solve, doing an A* search algorithm; note that brute-force doesn't use threading
+    void Solve( const char* fileName, bool saveProgress = false, bool useBruteForce = false, bool useThreading = true );
     
     // Print the purchase order / parts list
     void PrintSolution( const std::vector< char* > brickColorNames );

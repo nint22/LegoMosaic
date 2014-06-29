@@ -19,10 +19,12 @@
  
  General usage:
  
- ./legomosaic [brick definitions *.txt] [input pictures *.png] <-bruteforce> <-saveprogress>
+ ./legomosaic [brick definitions *.txt] [input pictures *.png] <-bruteforce> <-saveprogress> <-nothreading>
 
 ***/
 
+#include <chrono>
+#include <ctime>
 #include <vector>
 #include "LegoMosaic.h"
 
@@ -30,11 +32,12 @@ int main( int argc, const char * argv[] )
 {
     bool drawProgress = false;
     bool bruteForce = false;
+    bool noThreading = false;
     
     // Min args: ./legomosaic
     if( argc < 3 )
     {
-        printf( "./legomosaic [brick definitions *.txt] [input pictures *.png] <-bruteforce> <-saveprogress>\n" );
+        printf( "./legomosaic [brick definitions *.txt] [input pictures *.png] <-bruteforce> <-saveprogress> <-nothreading>\n" );
     }
     
     // Save def. file name and given png file
@@ -45,8 +48,9 @@ int main( int argc, const char * argv[] )
     for( int i = 3; i < argc; i++ )
     {
         // Just some minimized code: if( argv[i] == flagString ) flag = true; ignore all else
-        drawProgress |= ( drawProgress == true ) || ( strcmp( argv[ i ], "-drawprogress" ) == 0 );
+        drawProgress |= ( drawProgress == true ) || ( strcmp( argv[ i ], "-saveprogress" ) == 0 );
         bruteForce |= ( bruteForce == true ) || ( strcmp( argv[ i ], "-bruteforce" ) == 0 );
+        noThreading |= ( bruteForce == true ) || ( strcmp( argv[ i ], "-nothreading" ) == 0 );
     }
     
     // Attempt loading
@@ -98,9 +102,19 @@ int main( int argc, const char * argv[] )
         brickDefinitions.push_back( BrickDefinition( i, Vec2( w, h ), c ) );
     }
     
+    // How long does it take to solve?
+    std::chrono::time_point< std::chrono::system_clock > start, end;
+    start = std::chrono::system_clock::now();
+    
    	// Load the given image
 	LegoMosaic legoMosaic( brickDefinitions, brickColors );
-	legoMosaic.Solve( pngFileName, drawProgress, bruteForce );
+	legoMosaic.Solve( pngFileName, drawProgress, bruteForce, !noThreading );
+    
+    // Measure time
+    end = std::chrono::system_clock::now();
+    std::chrono::duration< double > elapsed_seconds = end - start;
+    
+    printf( "Total time to compute: %d seconds\n", (int)elapsed_seconds.count() );
     
     // Print the solution set's data
     legoMosaic.PrintSolution( brickColorNames );
